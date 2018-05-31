@@ -7,13 +7,11 @@ using System.Threading.Tasks;
 
 namespace IntelektikosProjektas.Models
 {
-    public class Translatable
+    public class Translatable : ParentTextModel
     {
-        public string originalText { get; set; }
-
         public Translatable(string text)
         {
-            this.originalText = text;
+            this.text = text;
         }
 
         public string saveText()
@@ -22,7 +20,7 @@ namespace IntelektikosProjektas.Models
 
             conn.Open();
 
-            MySqlCommand cmd = new MySqlCommand("INSERT INTO `intelektika`.`translatable`(`originalText`) VALUES('" + this.originalText + "');", conn);
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO `intelektika`.`translatable`(`originalText`) VALUES('" + this.text + "');", conn);
 
             cmd.ExecuteReader();
 

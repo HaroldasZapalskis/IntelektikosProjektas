@@ -6,16 +6,15 @@ using System.Threading.Tasks;
 
 namespace IntelektikosProjektas.Models
 {
-    public class TranslationModel
+    public class TranslationModel : ParentTextModel
     {
         public Translatable translatable { get; set; }
-        public string translateText { get; set; }
         public int Id { get; set; }
 
         public TranslationModel(Translatable translatable, string text, int id)
         {
             this.translatable = translatable;
-            this.translateText = text;
+            this.text = text;
             this.Id = id;
         }
 
