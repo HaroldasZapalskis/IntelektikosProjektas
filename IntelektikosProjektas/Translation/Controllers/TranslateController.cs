@@ -28,5 +28,11 @@ namespace IntelektikosProjektas.Translation.Controllers
             Translatable translatable = new Translatable(text);
             return "executing: Controller Translate: saveText()" + System.Environment.NewLine + translatable.saveText();
         }
+
+        public string saveTranslation(string text, int id)
+        {
+            TranslationModel translationModel = new TranslationModel(text, id);
+            return "executing: Controller Translate: saveText()" + System.Environment.NewLine + translatable.saveText();
+        }
     }
 }

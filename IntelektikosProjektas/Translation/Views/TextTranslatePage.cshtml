@@ -11,18 +11,58 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.Id)
-                </td>                
-                <td>
-                    @Html.DisplayFor(modelItem => item.translatable.originalText)
-                </td>                
-                <td>
-                    @Html.DisplayFor(modelItem => item.translateText)
-                </td>
-            </tr>
-
+        <tr>
+            <td>
+                @Html.DisplayTextFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.translatable.text)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.text)
+            </td>
+            <td>
+                <button onclick=openTextTranslateTranslationPage(@Html.DisplayTextFor(modelItem => item.Id))>Pateikti vertima</button>
+            </td>
+            <td>
+                <input style="display:none" id="@Html.DisplayTextFor(modelItem => item.Id)" />
+            </td>
+            <td>
+                <button onclick=saveEnteredTranslation(@Html.DisplayTextFor(modelItem => item.Id))>Pateikti</button>
+            </td>
+        </tr>
         }
     </table>
 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function openTextTranslateTranslationPage(string) {
+        console.log("executing : openTextTranslateTranslationPage()");
+        document.getElementById(string).style.display = "block";
+    }
+
+    function saveEnteredTranslation(number) {
+        text = document.getElementById(number).value;
+        if (text === "") {
+            console.log("executing : saveEnteredTranslation() -> checking if empty : STRING IS EMPTY");
+            alert("YOU CANNOT SUBMIT EMPTY STRING");
+        } else {
+            console.log("executing : saveEnteredTranslation() -> checking if empty : STRING IS NOT EMPTY");
+
+            $.ajax({
+                type: "GET",
+                url: '/translate/saveTranslation?id=' + number +'&text=' + text, // <-- Where should this point?
+                error: function (xhr, status, errorThrown) {
+                    var err = "Status: " + status + " " + errorThrown;
+                    console.log(err);
+                },
+                success: function (response) {
+                    console.log(response);
+                    alert('DATA ADDED TO DATABASE')
+                }
+            });
+        }
+        alert(text);
+    }
+</script>

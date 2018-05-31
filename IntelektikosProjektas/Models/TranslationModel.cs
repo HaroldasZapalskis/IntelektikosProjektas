@@ -22,6 +22,12 @@ namespace IntelektikosProjektas.Models
         {
         }
 
+        public TranslationModel(string text, int id)
+        {
+            this.text = text;
+            translatable = translatable.find
+        }
+
         public List<TranslationModel> getList()
         {
             List<TranslationModel> list = new List<TranslationModel>();
