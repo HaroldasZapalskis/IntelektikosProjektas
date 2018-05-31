@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<button id="button" onclick="openTextUploadPage()">Pateikti teksta</button>
+<input style="display: none" id="input"/>
+<button style="display: none" id="button2" onclick="saveEnteredText()">Issaugoti teksta</button>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function openTextUploadPage() {
+        console.log("executing : openTextUploadPage()");
+        document.getElementById("button").style.display = "none";
+        document.getElementById("input").style.display = "block";       
+        document.getElementById("button2").style.display = "block";       
+    }
+
+    function saveEnteredText() {
+        text = document.getElementById("input").value;
+        if (text === "") {
+            console.log("executing : saveText() -> checking if empty : STRING IS EMPTY");
+            alert("YOU CANNOT SUBMIT EMPTY STRING");
+        } else {
+            console.log("executing : saveText() -> checking if empty : STRING IS NOT EMPTY");
+
+            $.ajax({
+                type: "GET",
+                url: '/translate/saveText?text=' + text, // <-- Where should this point?
+                error: function (xhr, status, errorThrown) {
+                    var err = "Status: " + status + " " + errorThrown;
+                    console.log(err);
+                },
+                success: function (response) {
+                    console.log(response);
+                    alert('DATA ADDED TO DATABASE')
+                }
+            });
+        }
+    }
+</script>

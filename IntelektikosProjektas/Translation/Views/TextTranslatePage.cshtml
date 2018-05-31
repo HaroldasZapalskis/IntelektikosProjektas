@@ -1,0 +1,28 @@
+﻿@model IEnumerable<IntelektikosProjektas.Models.TranslationModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    <table class="table">
+        <tr>
+            <th>ID</th>
+            <th>Original Text</th>
+            <th>Translation</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.Id)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.translatable.originalText)
+                </td>                
+                <td>
+                    @Html.DisplayFor(modelItem => item.translateText)
+                </td>
+            </tr>
+
+        }
+    </table>
+</div>

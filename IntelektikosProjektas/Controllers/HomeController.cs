@@ -12,58 +12,58 @@ namespace IntelektikosProjektas.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IConfiguration configuration;
+        //private readonly IConfiguration configuration;
 
-        public HomeController(IConfiguration config)
-        {
-            this.configuration = config;
-        }
+        //public HomeController(IConfiguration config)
+        //{
+        //    this.configuration = config;
+        //}
 
-        public IActionResult Index()
-        {
-            string connStr = configuration.GetConnectionString("DefaultConnection");
+        //public IActionResult Index()
+        //{
+        //    string connStr = configuration.GetConnectionString("DefaultConnection");
 
-            MySqlConnection conn = new MySqlConnection(connStr);
+        //    MySqlConnection conn = new MySqlConnection(connStr);
 
-            conn.Open();
+        //    conn.Open();
 
-            MySqlCommand cmd = new MySqlCommand("select * from test", conn);
-
-
-            List<Test> list = new List<Test>();
-            using (var reader = cmd.ExecuteReader())
-            {
-                while (reader.Read())
-                {
-                    list.Add(new Test()
-                    {
-                        Id = Convert.ToInt32(reader["idtest"])
-                    });
-                }
-            }
+        //    MySqlCommand cmd = new MySqlCommand("select * from test", conn);
 
 
+        //    List<Test> list = new List<Test>();
+        //    using (var reader = cmd.ExecuteReader())
+        //    {
+        //        while (reader.Read())
+        //        {
+        //            list.Add(new Test()
+        //            {
+        //                Id = Convert.ToInt32(reader["idtest"])
+        //            });
+        //        }
+        //    }
 
-            return View(list);
-        }
 
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
 
-            return View();
-        }
+        //    return View(list);
+        //}
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+        //public IActionResult About()
+        //{
+        //    ViewData["Message"] = "Your application description page.";
 
-            return View();
-        }
+        //    return View();
+        //}
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+        //public IActionResult Contact()
+        //{
+        //    ViewData["Message"] = "Your contact page.";
+
+        //    return View();
+        //}
+
+        //public IActionResult Error()
+        //{
+        //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        //}
     }
 }
