@@ -5,16 +5,12 @@
 <div>
     <table class="table">
         <tr>
-            <th>ID</th>
             <th>Original Text</th>
             <th>Translation</th>
         </tr>
         @foreach (var item in Model)
         {
         <tr>
-            <td>
-                @Html.DisplayTextFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.translatable.text)
             </td>
@@ -53,12 +49,7 @@
             $.ajax({
                 type: "GET",
                 url: '/translate/saveTranslation?id=' + number +'&text=' + text, // <-- Where should this point?
-                error: function (xhr, status, errorThrown) {
-                    var err = "Status: " + status + " " + errorThrown;
-                    console.log(err);
-                },
-                success: function (response) {
-                    console.log(response);
+                success: function () {
                     alert('DATA ADDED TO DATABASE')
                 }
             });

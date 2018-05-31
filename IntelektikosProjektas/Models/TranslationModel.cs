@@ -25,7 +25,7 @@ namespace IntelektikosProjektas.Models
         public TranslationModel(string text, int id)
         {
             this.text = text;
-            translatable = translatable.find
+            this.Id = id;
         }
 
         public List<TranslationModel> getList()
@@ -49,6 +49,15 @@ namespace IntelektikosProjektas.Models
             conn.Close();
 
             return list;
+        }
+
+        public void saveTranslateText()
+        {
+            MySqlConnection conn = new MySqlConnection("server=localhost;port=3306;;database=intelektika;user=root;");
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand("INSERT INTO `intelektika`.`translation`(`translateText`, `translatable`) VALUES('" + this.text + "', '"+ this.Id +"');", conn);
+            cmd.ExecuteReader();
+            conn.Close();
         }
     }
 }
